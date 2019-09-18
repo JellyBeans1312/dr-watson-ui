@@ -6,10 +6,6 @@ describe("actions", () => {
       {
         message: 'hello',
         user: false
-      },
-      {
-        message: 'something',
-        user: true
       }
     ];
     const expectedAction = {
@@ -18,10 +14,6 @@ describe("actions", () => {
         {
           message: 'hello',
           user: false
-        },
-        {
-          message: 'something',
-          user: true
         }
       ]
     };

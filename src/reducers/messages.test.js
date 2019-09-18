@@ -11,10 +11,10 @@ describe('messagesReducer', () => {
   it("should return state if clear messages is the case", () => {
     let mockAction = {
       type: "CLEAR_MESSAGES",
-      messages: [{id: 1}],
-      user: false
+      messages: []
     };
-    expect(messages([], mockAction)).toEqual([]);
+    const expected = []
+    expect(messages([], mockAction)).toEqual(expected);
   });
   it("should return an array of messages if add messages is the case", () => {
     let mockAction = {
