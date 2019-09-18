@@ -17,11 +17,14 @@ describe('messagesReducer', () => {
     expect(messages([], mockAction)).toEqual(expected);
   });
   it("should return an array of messages if add messages is the case", () => {
+    const mockState = [
+      {message: 's', isUser: false}
+    ]
     let mockAction = {
       type: "ADD_MESSAGES",
       messages: 'hello', 
       user: false
     };
-    expect(messages([], mockAction)).toEqual([{ message: 'hello', isUser: false}]);
+    expect(messages(mockState, mockAction)).toEqual([{message: 's', isUser: false}, { message: 'hello', isUser: false}]);
   });
 })
