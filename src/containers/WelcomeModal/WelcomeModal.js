@@ -20,9 +20,18 @@ export class WelcomeModal extends Component {
     this.setState({ [e.target.name]: e.target.value, error: '' });
   }
 
-  handleSubmit = e => {
+  formValidation = (e) => {
+    e.preventDefault()
     const { firstName, lastName, feeling } = this.state;
-    e.preventDefault();
+    if( firstName || lastName || feeling === '') {
+      this.setState({error: 'Must fill out all inputs, including feelings'})
+    } else {
+      this.handleSubmit()
+    } 
+  }
+
+  handleSubmit = () => {
+    const { firstName, lastName, feeling } = this.state;
     this.props.createUser({
       id: Date.now(),
       firstName,
@@ -68,7 +77,7 @@ export class WelcomeModal extends Component {
           <option value="stressed">Stressed</option>
           <option value="frustrated">Frustrated</option>
         </select>
-        <button onClick={this.handleSubmit}>
+        <button onClick={this.formValidation}>
           Take 5 minutes to check in!
         </button>
       </form>
