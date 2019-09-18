@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import Header from '../Header/Header';
 import WelcomeModal from '../WelcomeModal/WelcomeModal';
 import ChatBox from '../ChatBox/ChatBox';
-import { removeUser, hasErrored } from '../../actions';
+import { removeUser, hasErrored, clearMessage } from '../../actions';
 import { endConversation } from '../../apiCalls';
 import './App.css';
 
@@ -13,7 +13,7 @@ export class App extends Component {
     try {
       await endConversation();
       this.props.removeUser();
-      this.clearMessages();
+      this.props.clearMessage();
     } catch({ message }) {
       this.props.hasErrored(message);
     }
@@ -32,9 +32,9 @@ export class App extends Component {
 }
 
 export const mapStateToProps = ({ user }) => ({
-  user,
+  user
 });
 
-export const mapDispatchToProps = dispatch =>  bindActionCreators({ removeUser, hasErrored }, dispatch);
+export const mapDispatchToProps = dispatch =>  bindActionCreators({ removeUser, hasErrored, clearMessage }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

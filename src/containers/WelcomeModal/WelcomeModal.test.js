@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { WelcomeModal, mapDispatchToProps } from './WelcomeModal';
-import { createUser, hasErrored } from '../../actions';
+import { createUser, hasErrored, addMessage } from '../../actions';
 import { startConversation } from '../../apiCalls';
 
 jest.mock('../../apiCalls');
@@ -130,14 +130,14 @@ describe('WelcomeModal component', () => {
     expect(wrapper.instance().handleChange).toHaveBeenCalledWith(mockFeelingEvent);
   });
 
-  it('should run handleSubmit on click of button', () => {
+  it('should run formValidation on click of button', () => {
     const mockEvent = { preventDefault: jest.fn() };
-    wrapper.instance().handleSubmit = jest.fn();
+    wrapper.instance().formValidation = jest.fn();
     wrapper.instance().forceUpdate();
 
     wrapper.find('button').simulate('click', mockEvent);
 
-    expect(wrapper.instance().handleSubmit).toHaveBeenCalled();
+    expect(wrapper.instance().formValidation).toHaveBeenCalled();
   });
 });
 
@@ -164,6 +164,18 @@ describe('mapDispatchToProps', () => {
 
     const mappedProps = mapDispatchToProps(mockDispatch);
     mappedProps.hasErrored('fetch failed');
+
+    expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+  });
+  it('calls dispatch with a addMessage action when addMessage is called', () => {
+    const mockMessages = [
+      {messages: 'hello', isUser: false}
+    ]
+    
+    const mockDispatch = jest.fn();
+    const actionToDispatch = addMessage(mockMessages);
+    const mappedProps = mapDispatchToProps(mockDispatch);
+    mappedProps.addMessage(mockMessages);
 
     expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
   });
