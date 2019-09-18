@@ -15,4 +15,8 @@ export const hasErrored = errorMsg => ({
 export const addMessages = messages => ({
   type: 'ADD_MESSAGES',
   messages
+});
+
+export const clearMessages = () => ({
+  type: 'CLEAR_MESSAGES'
 })
