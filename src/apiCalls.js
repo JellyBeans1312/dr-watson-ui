@@ -31,7 +31,7 @@ export const postMessage = async newMessage => {
     const result = await response.json()
     return result
   } catch(error) {
-    console.log(error)
+    throw new Error('I did not want answer that question. Please try a different one')
   }
 }
 
