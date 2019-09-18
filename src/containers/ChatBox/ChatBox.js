@@ -26,7 +26,6 @@ export class ChatBox extends Component {
     if (e.key === 'Enter' || e.button === 0) {
       const { message } = this.state;
       this.props.addMessage(message, true);
-      console.log(this.props.messages)
       this.setState({ message: '' });
       this.messageChatBot();
     }
@@ -45,7 +44,6 @@ export class ChatBox extends Component {
     const { message } = this.state
     const { messages, errorMsg } = this.props;
     const survey = messages.map((message, i) => {
-      console.log(message)
       return <Message
         key={`message${i}`}
         message={message.message}
